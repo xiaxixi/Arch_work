@@ -11,13 +11,13 @@
     <van-cell-group>
       <van-cell class="parent-box parent-cell" value="详细信息"/>
       <van-field label="证件类型" value="中国居民身份证" readonly/>
-      <van-field label="证件号码" v-model="id_no" placeholder="用于身份核验，请正确填写" clearable/>
+      <van-field label="证件号码" v-model="id_no" placeholder="用于身份核验，请正确填写" :error-message="idErrMsg" clearable/>
     </van-cell-group>
 
     <van-cell-group>
       <van-cell class="parent-box parent-cell" value="联系方式"/>
-      <van-field label="手机号码" v-model="phone_number" type="tel" placeholder="请准确填写您的手机号" clearable/>
-      <van-field label="电子邮箱" v-model="email" placeholder="请准确填写邮箱地址" clearable/>
+      <van-field label="手机号码" v-model="phone_number" type="tel" placeholder="请准确填写您的手机号" :error-message="pnErrMsg" clearable/>
+      <van-field label="电子邮箱" v-model="email" placeholder="请准确填写邮箱地址" :error-message="emailErrMsg" clearable/>
     </van-cell-group>
 
     <van-cell-group>
@@ -55,8 +55,9 @@ export default {
       this.$router.push('login');
     },
 
-    onConfirm(value) {
+    onConfirm(value, index) {
       this.role_value = value;
+      this.role = index;
       this.show = false;
     },
 
@@ -76,8 +77,22 @@ export default {
         });
 
         //后端：axios添加注册代码
-        Toast.clear();
-        this.$router.push('login');
+        this.$axios
+          .post('/users/register', {
+            username: this.username,
+            password: this.password,
+            email: this.email,
+            phone_number: this.phone_number,
+            id_no: this.id_no,
+            role: this.role
+          })
+          .then(res => res.data)
+          .then(data => {
+            Toast.clear();
+            Toast(data.msg);
+
+            if (data.code === 1) this.$router.push('/login');
+          });
       } else {
         Toast.fail('无效信息！');
       }
@@ -95,22 +110,70 @@ export default {
         this.password == this.checkpassword &&
         this.nameErr == false &&
         this.pwdErr1 == false &&
-        this.pwdErr2 == false
+        this.pwdErr2 == false &&
+        this.idErr == false &&
+        this.pnErr == false &&
+        this.emailErr == false
       );
     },
 
-    // 判断用户名是否含有特俗字符+' ' 除'_'
-    checks() {
+    // 判断str是否含有特俗字符+' ' 除'_'
+    checks(str) {
       var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？%+]");
-      for (var i = 0; i < this.username.length; i++) {
-        if (!this.username.substr(i, 1).replace(pattern, '')) {
+      for (var i = 0; i < str.length; i++) {
+        if (!str.substr(i, 1).replace(pattern, '')) {
           return true;
         }
-        if (this.username.substr(i, 1) == ' ') {
+        if (str.substr(i, 1) == ' ') {
           return true;
         }
       }
       return false;
+    },
+
+    // 判断str是否全是数字
+    checkStrNUm(str) {
+      var numReg = /^[0-9]+$/;
+      var numRe = new RegExp(numReg);
+      for (var i = 0; i < str.length; i++) {
+        if (str.substr(i, 1).replace(numRe, '')) {
+          return false;
+        }
+      }
+      return true;
+    },
+
+    // 判断身份证是否合法
+    checksId() {
+      if (this.id_no.length == 18) {
+        if (
+          this.checkStrNUm(this.id_no.substr(0, 17)) &&
+          (this.checkStrNUm(this.id_no.substr(17, 1)) || this.id_no[17] === 'x')
+        ) {
+          return true;
+        }
+      }
+      return false;
+    },
+
+    // 判断手机号码是否合法
+    checksPN() {
+      if (this.phone_number.length == 11) {
+        if (this.checkStrNUm(this.phone_number)) {
+          return true;
+        }
+      }
+      return false;
+    },
+
+    // 判断电子邮箱是否合法
+    checksEmail() {
+      var re = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+      if (re.test(this.email)) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
 
@@ -126,8 +189,15 @@ export default {
       pwdErr1: true,
       pwdErr2: true,
       id_no: '',
+      idErrMsg: '',
+      idErr: true,
       phone_number: '',
+      pnErrMsg: '',
+      pnErr: true,
       email: '',
+      emailErrMsg: '',
+      emailErr: true,
+      role: 0,
       role_value: '成人',
       show: false,
       columns: ['成人', '儿童', '学生', '残军']
@@ -142,7 +212,7 @@ export default {
       } else if (this.username.length > 30) {
         this.nameErrMsg = '用户名长度不能大于30！';
         this.nameErr = true;
-      } else if (this.checks()) {
+      } else if (this.checks(this.username)) {
         this.nameErrMsg = '非法字符！';
         this.nameErr = true;
       } else {
@@ -171,6 +241,36 @@ export default {
       } else {
         this.pwdErrMsg2 = '';
         this.pwdErr2 = false;
+      }
+    },
+
+    id_no() {
+      if (this.checksId()) {
+        this.idErrMsg = '';
+        this.idErr = false;
+      } else {
+        this.idErrMsg = '身份证格式错误';
+        this.idErr = true;
+      }
+    },
+
+    phone_number() {
+      if (this.checksPN()) {
+        this.pnErrMsg = '';
+        this.pnErr = false;
+      } else {
+        this.pnErrMsg = '手机号码格式错误';
+        this.pnErr = true;
+      }
+    },
+
+    email() {
+      if (this.checksEmail()) {
+        this.emailErrMsg = '';
+        this.emailErr = false;
+      } else {
+        this.emailErrMsg = '邮箱格式错误';
+        this.emailErr = true;
       }
     }
   }
@@ -206,4 +306,3 @@ export default {
   margin-bottom: 5%;
 }
 </style>
-
