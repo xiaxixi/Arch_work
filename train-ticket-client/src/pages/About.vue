@@ -7,29 +7,29 @@
     <van-cell class="son-cell">
       <template slot="title">
         <span class="custom-title">用户名：</span>
-        <span class="custom-text">zlxx</span>
-        <van-tag plain color="#42b983" class="role-tag">crxx</van-tag>
+        <span class="custom-text">{{ this.user.username }}</span>
+        <van-tag plain color="#42b983" class="role-tag">{{ this.columns[this.user.role] }}</van-tag>
       </template>
     </van-cell>
 
     <van-cell class="son-cell">
       <template slot="title">
         <span class="custom-title">手机号：</span>
-        <span class="custom-text">zlxx</span>
+        <span class="custom-text">{{ this.user.phone_number }}</span>
       </template>
     </van-cell>
 
     <van-cell class="son-cell">
       <template slot="title">
         <span class="custom-title">邮箱：</span>
-        <span class="custom-text">zlxx</span>
+        <span class="custom-text">{{ this.user.email }}</span>
       </template>
     </van-cell>
 
     <van-cell class="son-cell">
       <template slot="title">
         <span class="custom-title">身份证：</span>
-        <span class="custom-text">zlxx</span>
+        <span class="custom-text">{{ this.user.id_no }}</span>
       </template>
     </van-cell>
 
@@ -56,6 +56,8 @@
 
 <script>
 import { NavBar, Cell, CellGroup, Tag, Button, Toast } from 'vant';
+import { mapState } from 'vuex';
+
 export default {
   name: 'about',
 
@@ -68,9 +70,7 @@ export default {
     [Toast.name]: Toast
   },
 
-  // computed: mapState([
-  //   'user'
-  // ]),
+  computed: mapState(['user']),
 
   data() {
     return {
@@ -81,7 +81,7 @@ export default {
   methods: {
     logout() {
       this.$router.push('login');
-      // this.$store.dispatch('deleteUserAction');
+      this.$store.dispatch('deleteUserAction');
       Toast.success('注销成功');
     }
   }
