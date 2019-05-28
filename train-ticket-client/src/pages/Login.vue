@@ -58,8 +58,18 @@ export default {
         });
 
         // 后端：axios加入登陆成功代码
-        Toast.clear();
-        this.$router.push('home');
+        this.$axios
+          .post('/users/login', { username: this.username, password: this.password })
+          .then(res => res.data)
+          .then(data => {
+            Toast.clear();
+            Toast(data.msg);
+
+            if (data.code === 1) {
+              this.$store.dispatch('setUserAction', data.user);
+              this.$router.push('/home');
+            }
+          });
       } else {
         if (!this.username && this.password) {
           Toast.fail('请输入用户名');
