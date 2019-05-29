@@ -5,7 +5,7 @@ let seq;
 
 dotenv.config();
 
-seq = new sequelize(process.env.DB_DB_SAVE, process.env.DB_USER, process.env.DB_PWD, {
+seq = new sequelize(process.env.DB_DB, process.env.DB_USER, process.env.DB_PWD, {
   dialect: process.env.DB_TYPE,
   host: process.env.DB_HOST
 });
