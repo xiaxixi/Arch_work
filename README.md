@@ -31,8 +31,24 @@ REST全称是Representational State Transfer，中文意思是表述（编者注
 
 1、vue——前端页面
 
-2、vant——轻量、可靠的移动端 Vue 组件库
+vant——轻量、可靠的移动端 Vue 组件库
 
-3、前后端分离
+前后端分离——前端：vue、vuex、vant等；后端：express、sequelize、mysql等。前后端分离，通过api传输数据
 
-4、
+ES6——let命令；Arrow Function（箭头函数作用：）
+
+2、sequelize——sequelize是 Node 的一个 ORM(Object-Relational Mapping) 框架，用来方便数据库mysql操作；sequelize.op用来处理复杂操作。
+
+3、Bcrypt加密——Bcrypt是单向Hash加密算法，不可反向破解生成明文。破解一个Bcrypt密码的时间比较长（比md5更长），所以时间成本太高，比MD5更安全。
+
+4、读写分离——两个数据库
+
+5、axios
+
+6、docker
+
+7、mq——消息总线（Message Queue），是一种跨进程的通信机制，用于上下游传递消息。
+
+8、loaderbalence
+
+9、express——
