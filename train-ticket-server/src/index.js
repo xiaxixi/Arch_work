@@ -5,7 +5,7 @@ import logger from 'morgan';
 import cors from 'cors';
 
 import users from './routes/users';
-import fakes from './routes/fakes';
+// import fakes from './routes/fakes';
 
 const app = express();
 
@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/api/users', users);
-app.use('/api/fakes', fakes);
+// app.use('/api/fakes', fakes);
 
 app.get('/*', (req, res) => {
   res.status(200).json({ msg: 'VUE-BOOKING API' });
