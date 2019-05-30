@@ -1,8 +1,8 @@
 <template>
   <van-tabbar v-model="active" active-color="#07c160" v-if="show">
     <van-tabbar-item icon="logistics" to="/home">首页</van-tabbar-item>
-    <van-tabbar-item icon="goods-collect-o" to="/mall">商旅</van-tabbar-item>
-    <van-tabbar-item icon="notes-o" to="/new">公告</van-tabbar-item>
+    <van-tabbar-item icon="goods-collect-o" to="/mail">商旅</van-tabbar-item>
+    <van-tabbar-item icon="notes-o" to="/announcement">公告</van-tabbar-item>
     <van-tabbar-item icon="pending-payment" to="/order">订单</van-tabbar-item>
     <van-tabbar-item icon="contact" to="/about">我的</van-tabbar-item>
   </van-tabbar>
@@ -22,7 +22,7 @@ export default {
 
   mounted() {
     if (this.$route.name === 'home') this.active = 0;
-    if (this.$route.name === 'mall') this.active = 1;
+    if (this.$route.name === 'mail') this.active = 1;
     if (this.$route.name === 'new') this.active = 2;
     if (this.$route.name === 'order') this.active = 3;
     if (this.$route.name === 'about') this.active = 4;

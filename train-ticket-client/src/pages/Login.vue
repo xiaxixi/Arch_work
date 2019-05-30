@@ -57,7 +57,7 @@ export default {
           message: '登录中...'
         });
 
-        // 后端：axios加入登陆成功代码
+        // // 从api得到数据
         this.$axios
           .post('/users/login', { username: this.username, password: this.password })
           .then(res => res.data)

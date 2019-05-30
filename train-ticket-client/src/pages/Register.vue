@@ -76,7 +76,7 @@ export default {
           message: '注册中...'
         });
 
-        //后端：axios添加注册代码
+        // 从api得到数据
         this.$axios
           .post('/users/register', {
             username: this.username,
@@ -86,6 +86,7 @@ export default {
             id_no: this.id_no,
             role: this.role
           })
+          // ES6——Arrow Function
           .then(res => res.data)
           .then(data => {
             Toast.clear();
@@ -117,10 +118,11 @@ export default {
       );
     },
 
+    // ES6——let命令
     // 判断str是否含有特俗字符+' ' 除'_'
     checks(str) {
-      var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？%+]");
-      for (var i = 0; i < str.length; i++) {
+      let pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？%+]");
+      for (let i = 0; i < str.length; i++) {
         if (!str.substr(i, 1).replace(pattern, '')) {
           return true;
         }
@@ -133,9 +135,9 @@ export default {
 
     // 判断str是否全是数字
     checkStrNUm(str) {
-      var numReg = /^[0-9]+$/;
-      var numRe = new RegExp(numReg);
-      for (var i = 0; i < str.length; i++) {
+      let numReg = /^[0-9]+$/;
+      let numRe = new RegExp(numReg);
+      for (let i = 0; i < str.length; i++) {
         if (str.substr(i, 1).replace(numRe, '')) {
           return false;
         }
@@ -168,7 +170,7 @@ export default {
 
     // 判断电子邮箱是否合法
     checksEmail() {
-      var re = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+      let re = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
       if (re.test(this.email)) {
         return true;
       } else {

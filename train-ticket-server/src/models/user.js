@@ -42,6 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
+  // Bcrypt加密
   User.prototype.encryptPassword = function (password) {
     return bcrypt.hashSync(password, 10);
   }
@@ -67,6 +68,7 @@ module.exports = (sequelize, DataTypes) => {
     }, process.env.JWT_SECRET);
   }
 
+  // 验证密码
   User.prototype.isValidPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
   }

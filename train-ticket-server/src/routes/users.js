@@ -1,9 +1,14 @@
 import models from '../models';
 import express from 'express';
+<<<<<<< HEAD
+import sequelize from 'sequelize';
+import authenticate from '../middlewares/authenticate';
+=======
 import Sequelize from 'sequelize';
 // import authenticate from '../middlewares/authenticate';
+>>>>>>> 991f10d198d3b400c32c2ac4c4d78aa707b8754d
 
-const Op = Sequelize.Op;
+const Op = sequelize.Op;
 
 var router = express.Router();
 

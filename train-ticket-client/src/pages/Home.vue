@@ -47,14 +47,18 @@ export default {
     return {
       startshow: false,
       startValue: '起始站',
+      start: '',
       endshow: false,
       endValue: '终点站',
+      end: '',
       tmp: '',
       date: '',
       disabledDates: {
         to: new Date()
       },
-      columns: ['杭州', '宁波', '温州', '嘉兴', '湖州']
+      // columns: ['杭州', '宁波', '温州', '嘉兴', '湖州']
+      columns: ['杭州东', '上海南', '成都', '宁波'],
+      values: ['HGH', 'SNH', 'CDW', 'NGH']
     };
   },
 
@@ -63,14 +67,16 @@ export default {
       window.console.log(`当前值：${value}, 当前索引：${index}`);
     },
 
-    onStartConfirm(value) {
+    onStartConfirm(value, index) {
       this.startValue = value;
       this.startshow = false;
+      this.start = this.values[index];
     },
 
-    onEndConfirm(value) {
+    onEndConfirm(value, index) {
       this.endValue = value;
       this.endshow = false;
+      this.end = this.values[index];
     },
 
     onCancel() {
@@ -89,9 +95,8 @@ export default {
     onSearch() {
       if (this.startValue !== '起始站' && this.endValue !== '终点站' && this.startValue !== this.endValue && this.date) {
         this.$router.push({
-          name: 'search'
-          // name: 'search',
-          // query: { start: this.startValue, end: this.endValue, date: this.date.toISOString().slice(0, 10) }
+          name: 'search',
+          query: { start: this.start, end: this.end, date: this.date.toISOString().slice(0, 10) }
         });
       } else {
         Toast.fail('信息无效');

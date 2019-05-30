@@ -19,7 +19,7 @@ app.use('/api/users', users);
 // app.use('/api/fakes', fakes);
 
 app.get('/*', (req, res) => {
-  res.status(200).json({ msg: 'VUE-BOOKING API' });
+  res.status(200).json({ msg: 'VUE-TRAIN_TICKET API' });
 })
 
 app.listen(3000, () => console.log("> Running on localhost:3000"));
