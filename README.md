@@ -41,18 +41,14 @@ ES6——let命令；Arrow Function（箭头函数作用：）
 
 3、Bcrypt加密——Bcrypt是单向Hash加密算法，不可反向破解生成明文。破解一个Bcrypt密码的时间比较长（比md5更长），所以时间成本太高，比MD5更安全。
 
-4、读写分离——两个数据库
+4、读写分离——
 
-5、axios
+5、axios——已有
 
-6、docker
+6、express——已有
 
-7、mq——消息总线（Message Queue），是一种跨进程的通信机制，用于上下游传递消息。
+7、docker
 
-8、loaderbalence
+8、mq——消息总线（Message Queue），是一种跨进程的通信机制，用于上下游传递消息。
 
-<<<<<<< HEAD
-9、express——
-=======
-9、express——
->>>>>>> 991f10d198d3b400c32c2ac4c4d78aa707b8754d
+9、loaderbalence
