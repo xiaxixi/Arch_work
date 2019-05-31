@@ -5,11 +5,7 @@ let seq;
 
 dotenv.config();
 
-<<<<<<< HEAD
 seq = new sequelize(process.env.DB_DB_SAVE, process.env.DB_USER, process.env.DB_PWD, {
-=======
-seq = new sequelize(process.env.DB_DB, process.env.DB_USER, process.env.DB_PWD, {
->>>>>>> 991f10d198d3b400c32c2ac4c4d78aa707b8754d
   dialect: process.env.DB_TYPE,
   host: process.env.DB_HOST
 });
@@ -33,8 +29,4 @@ Object.keys(models).forEach(key => {
 models.seq = seq;
 models.sequelize = sequelize;
 
-<<<<<<< HEAD
 module.exports = models;
-=======
-module.exports = models;
->>>>>>> 991f10d198d3b400c32c2ac4c4d78aa707b8754d
