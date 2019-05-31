@@ -17,13 +17,13 @@ router.post('/register', (req, res) => {
       res.status(200).json({
         code: 1,
         user: record.toAuthJSON(),
-        msg: 'Register successfully!'
+        msg: '注册成功！'
       });
     })
     .catch(err => {
       res.status(200).json({
         code: -1,
-        msg: 'Register failed（用户名已存在）!'
+        msg: '注册失败（用户名已存在）！'
       });
     });
 });
@@ -41,19 +41,19 @@ router.post('/login', (req, res) => {
         res.status(200).json({
           code: 1,
           user: record.toAuthJSON(),
-          msg: 'Login successfully!'
+          msg: '登陆成功！'
         });
       } else {
         res.status(200).json({
           code: -1,
-          msg: 'Login failed!'
+          msg: '登陆失败（用户名不存在）！'
         });
       }
     })
     .catch(err => {
       res.status(200).json({
         code: -1,
-        msg: 'Login failed!'
+        msg: '登陆失败（用户名不存在）！'
       });
     });
 });
