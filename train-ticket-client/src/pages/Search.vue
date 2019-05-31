@@ -89,7 +89,7 @@ export default {
 
 <style>
 .search .ticket-item:last-child {
-  margin-bottom: 20%;
+  margin-bottom: 5%;
 }
 </style>
 

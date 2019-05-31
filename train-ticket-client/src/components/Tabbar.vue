@@ -28,6 +28,7 @@ export default {
     if (this.$route.name === 'about') this.active = 4;
     if (this.$route.name === 'login') this.show = false;
     if (this.$route.name === 'register') this.show = false;
+    if (this.$route.name === 'search') this.show = false;
   },
 
   watch: {
@@ -37,6 +38,9 @@ export default {
           this.show = false;
           break;
         case 'register':
+          this.show = false;
+          break;
+        case 'search':
           this.show = false;
           break;
         default:

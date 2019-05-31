@@ -34,7 +34,7 @@ export default {
   },
 
   methods: {
-    showURL(idx) {
+    showURL() {
       this.$router.push({ name: 'mailitem', params: { id: base64.encode(this.src) } });
     }
   }
