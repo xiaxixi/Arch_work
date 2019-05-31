@@ -2,7 +2,6 @@ import models from '../models';
 import express from 'express';
 import sequelize from 'sequelize';
 import authenticate from '../middlewares/authenticate';
-import sequelize from 'sequelize';
 
 const Op = sequelize.Op;
 
