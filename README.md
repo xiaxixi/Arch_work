@@ -52,3 +52,31 @@ ES6——let命令；Arrow Function（箭头函数作用：）
 8、mq——消息总线（Message Queue），是一种跨进程的通信机制，用于上下游传递消息。
 
 9、loaderbalence
+
+
+
+#### 步骤
+
+1、下载
+
+2、cd train-ticket-client 
+
+   npm install
+   
+   npm run serve 
+
+3、修改 train-ticket-server/.env内容：你的数据库 用户名和密码
+
+   新建数据库  名称：train_ticket_save
+
+4、新开终端
+
+​   cd train-ticket-server
+
+   npm install
+
+​   npm start
+
+5、打开浏览器使用
+
+#### 
