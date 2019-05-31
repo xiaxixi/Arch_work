@@ -66,7 +66,7 @@ export default {
     },
 
     register() {
-      window.console.log(this.nameErr);
+      // window.console.log(this.nameErr);
       if (this.isFormLegal()) {
         Toast.loading({
           mask: true,
