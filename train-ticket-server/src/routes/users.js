@@ -46,14 +46,14 @@ router.post('/login', (req, res) => {
       } else {
         res.status(200).json({
           code: -1,
-          msg: '登陆失败（用户名不存在）！'
+          msg: '登陆失败！'
         });
       }
     })
     .catch(err => {
       res.status(200).json({
         code: -1,
-        msg: '登陆失败（用户名不存在）！'
+        msg: '登陆失败！'
       });
     });
 });
