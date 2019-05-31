@@ -61,22 +61,22 @@ ES6——let命令；Arrow Function（箭头函数作用：）
 
 2、cd train-ticket-client 
 
-   npm install
-   
-   npm run serve 
+​	npm install
+
+​	npm run serve 
 
 3、修改 train-ticket-server/.env内容：你的数据库 用户名和密码
 
-   新建数据库  名称：train_ticket_save
+​	新建数据库  名称：train_ticket_save
 
 4、新开终端
 
-​   cd train-ticket-server
+​	cd train-ticket-server
 
-   npm install
+​	npm install
 
-​   npm start
+​	npm start
 
-5、打开浏览器使用
+5、浏览器——开发者模式——Ctrl+Shift+M
 
 #### 
