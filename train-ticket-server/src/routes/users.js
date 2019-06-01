@@ -7,6 +7,19 @@ const Op = sequelize.Op;
 
 var router = express.Router();
 
+
+
+//MQ:注册成功时异步发送注册成功邮件，加快系统响应速度
+var email_queue = [];
+var email = require('emailjs');
+var server = email.server.connect({
+  user: "1198226333@qq.com",
+  password:"ecewlqeoretuhagg",
+  host:"smtp.qq.com",
+  ssl:true
+});
+
+
 router.post('/register', (req, res) => {
   const { username, password, phone_number, id_no, email, role } = req.body;
   models.User
@@ -18,6 +31,25 @@ router.post('/register', (req, res) => {
         code: 1,
         user: record.toAuthJSON(),
         msg: '注册成功！'
+        
+        
+        email_queue.push(email);
+        setTimeout(function(){
+           for(var i = email_queue.length - 1;i >= 0;i--){
+              server.send({
+                text:"gongxi",
+                from:"1198226333@qq.com",
+                to:email_queue[i],
+                cc:"1198226333@qq.com",
+                subject:"test"
+              },function(err,message){
+                console.log(err || message);
+              }); 
+              console.log(email_queue[i]);
+              email_queue.pop();
+            }
+          },10);
+  
       });
     })
     .catch(err => {
