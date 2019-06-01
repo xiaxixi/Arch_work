@@ -37,11 +37,11 @@ router.post('/register', (req, res) => {
         setTimeout(function(){
            for(var i = email_queue.length - 1;i >= 0;i--){
               server.send({
-                text:"gongxi",
+                text:"Congratulations!\n\nYou've successfully become a member of Train.",
                 from:"1198226333@qq.com",
                 to:email_queue[i],
                 cc:"1198226333@qq.com",
-                subject:"test"
+                subject:"Train"
               },function(err,message){
                 console.log(err || message);
               }); 
