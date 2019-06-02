@@ -67,7 +67,7 @@ ES6——let命令；Arrow Function（箭头函数作用：）
 
 3、修改 train-ticket-server/.env内容：你的数据库 用户名和密码
 
-​	新建数据库  名称：train_ticket_save
+​	新建数据库  名称：train_ticket
 
 4、新开终端
 
