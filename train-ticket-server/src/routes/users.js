@@ -1,4 +1,5 @@
-import models from '../models';
+import modelsW from '../models/index.js';
+import modelsR from '../models/slave-index.js';
 import express from 'express';
 import sequelize from 'sequelize';
 import authenticate from '../middlewares/authenticate';
@@ -9,7 +10,7 @@ var router = express.Router();
 
 router.post('/register', (req, res) => {
   const { username, password, phone_number, id_no, email, role } = req.body;
-  models.User
+  modelsW.User
     .create({
       username, password, phone_number, id_no, email, role
     })
@@ -23,14 +24,14 @@ router.post('/register', (req, res) => {
     .catch(err => {
       res.status(200).json({
         code: -1,
-        msg: '注册失败（用户名已存在）！'
+        msg: '注册失败！'
       });
     });
 });
 
 router.post('/login', (req, res) => {
   const { username, password } = req.body;
-  models.User
+  modelsR.User
     .findOne({
       where: {
         [Op.or]: [{ username: username }]
