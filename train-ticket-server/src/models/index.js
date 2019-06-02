@@ -1,32 +1,34 @@
 const sequelize = require('sequelize');
 const dotenv = require('dotenv');
-const models = {};
-let seq;
+const modelsW = {};
+let seqW;
 
 dotenv.config();
 
-seq = new sequelize(process.env.DB_DB_SAVE, process.env.DB_USER, process.env.DB_PWD, {
+// 连接master服务器 writer
+seqW = new sequelize(process.env.DB_DB, process.env.DB_USER, process.env.DB_PWD, {
   dialect: process.env.DB_TYPE,
-  host: process.env.DB_HOST
+  host: process.env.DB_HOST_WRITE,
+  port: process.env.PORT_WRITE
 });
-seq.sync();
+seqW.sync();
 
-const modules = [
+const modulesW = [
   require('./user'),
 ];
 
-modules.forEach(module => {
-  const model = module(seq, sequelize);
-  models[model.name] = model;
+modulesW.forEach(module => {
+  const modelW = module(seqW, sequelize);
+  modelsW[modelW.name] = modelW;
 })
 
-Object.keys(models).forEach(key => {
-  if (models[key].associate) {
-    models[key].associate(models);
+Object.keys(modelsW).forEach(key => {
+  if (modelsW[key].associate) {
+    modelsW[key].associate(modelsW);
   }
 });
 
-models.seq = seq;
-models.sequelize = sequelize;
+modelsW.seqW = seqW;
+modelsW.sequelize = sequelize;
 
-module.exports = models;
+module.exports = modelsW;
