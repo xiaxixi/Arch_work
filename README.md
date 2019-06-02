@@ -41,7 +41,7 @@ ES6——let命令；Arrow Function（箭头函数作用：）
 
 3、Bcrypt加密——Bcrypt是单向Hash加密算法，不可反向破解生成明文。破解一个Bcrypt密码的时间比较长（比md5更长），所以时间成本太高，比MD5更安全。
 
-4、读写分离——
+4、读写分离——https://segmentfault.com/a/1190000003716617
 
 5、axios——已有
 
