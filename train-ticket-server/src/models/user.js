@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+// 创建user表
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define(
     'User', {
