@@ -32,26 +32,27 @@ router.post('/register', (req, res) => {
         code: 1,
         user: record.toAuthJSON(),
         msg: '注册成功！'
-        
-        
-        email_queue.push(email);
-        setTimeout(function(){
-           for(var i = email_queue.length - 1;i >= 0;i--){
-              server.send({
-                text:"Congratulations!\n\nYou've successfully become a member of Train.",
-                from:"1198226333@qq.com",
-                to:email_queue[i],
-                cc:"1198226333@qq.com",
-                subject:"Train"
-              },function(err,message){
-                console.log(err || message);
-              }); 
-              console.log(email_queue[i]);
-              email_queue.pop();
-            }
-          },10);
-  
       });
+    
+    
+    
+            
+      email_queue.push(email);
+      setTimeout(function(){
+         for(var i = email_queue.length - 1;i >= 0;i--){
+            server.send({
+              text:"Congratulations!\n\nYou've successfully become a member of Train.",
+              from:"1198226333@qq.com",
+              to:email_queue[i],
+              cc:"1198226333@qq.com",
+              subject:"Train"
+            },function(err,message){
+              console.log(err || message);
+            }); 
+            console.log(email_queue[i]);
+            email_queue.pop();
+          }
+        },10);
     })
     .catch(err => {
       res.status(200).json({
