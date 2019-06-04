@@ -30,7 +30,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 ## Docker部署项目
+### 项目build生成静态html文件
+
+静态html文件在dist文件夹下
+
 ### 获取Nignx镜像
+
 sudo docker pull nginx
 
 ### 基于项目中的Dockfile构建Vue应用镜像（注意不要少了命令最后的 “.” ）
