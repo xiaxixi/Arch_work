@@ -2,60 +2,68 @@
 架构大作业：火车票预定系统
 
 
-## 八种技术
-1、读写分离——两个数据库</br>
 
-2、vue——前端页面</br>
+### 新技术
 
-3、md5加密——数据库password加密存储 （我使用过sha1）</br>
+###### 1、vue.js——前端页面
 
-4、ajax异步刷新——注册、登陆</br>
+Vue 是一套用于构建用户界面的**渐进式框架**。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动。
 
-5、sequelize——连接数据库</br>
+本系统以Vue2.6为前端框架，前端主要使用了vue、vuex、vue-router、axios，另外引入了vant这个UI库和vue.js-datepicker模块（日期选择器）。
 
-6、webpack——前端资源加载/打包工具</br>
+ES6——let命令；Arrow Function（箭头函数）
 
-7、less——动态样式语言</br>
+###### 2、axios——已有
 
-8、element——组件库：前端UI</br>
+###### 3、express——已有
 
-9、Redis	</br>
-是一个Key-Value的NoSQL数据库，开发维护很活跃，虽然它是一个Key-Value数据库存储系统，但它本身支持MQ功能，所以完全可以当做一个轻量级的队列服务来使用。对于RabbitMQ和Redis的入队和出队操作，各执行100万次，每10万次记录一次执行时间。测试数据分为128Bytes、512Bytes、1K和10K四个不同大小的数据。实验表明：入队时，当数据比较小时Redis的性能要高于RabbitMQ，而如果数据大小超过了10K，Redis则慢的无法忍受；出队时，无论数据大小，Redis都表现出非常好的性能，而RabbitMQ的出队性能则远低于Redis。</br>
+###### 4、sequelize——sequelize是 Node 的一个 ORM(Object-Relational Mapping) 框架，用来方便数据库mysql操作；sequelize.op用来处理复杂操作。
 
-10、restfulApi</br>
-REST全称是Representational State Transfer，中文意思是表述（编者注：通常译为表征）性状态转移。REST本身并没有创造新的技术、组件或服务，而隐藏在RESTful背后的理念就是使用Web的现有特征和能力， 更好地使用现有Web标准中的一些准则和约束。虽然REST本身受Web技术的影响很深， 但是理论上REST架构风格并不是绑定在HTTP上，只不过目前HTTP是唯一与REST相关的实例。 所以我们这里描述的REST也是通过HTTP实现的REST。</br>
+###### 5、Bcrypt加密
+
+ Bcrypt是一个跨平台的文件加密工具。由它加密的文件可在所有支持的操作系统和处理器上进行转移。它的口令必须是8至56个字符，并将在内部被转化为448位的密钥。
 
 
+Bcrypt加密是单向Hash加密算法，不可反向破解生成明文。破解一个Bcrypt密码的时间比较长（比MD5更长），所以时间成本太高，比MD5更安全。
 
-### 实际用的技术
-
-1、vue——前端页面
-
-vant——轻量、可靠的移动端 Vue 组件库
-
-前后端分离——前端：vue、vuex、vant等；后端：express、sequelize、mysql等。前后端分离，通过api传输数据
-
-ES6——let命令；Arrow Function（箭头函数作用：）
-
-2、sequelize——sequelize是 Node 的一个 ORM(Object-Relational Mapping) 框架，用来方便数据库mysql操作；sequelize.op用来处理复杂操作。
-
-3、Bcrypt加密——Bcrypt是单向Hash加密算法，不可反向破解生成明文。破解一个Bcrypt密码的时间比较长（比md5更长），所以时间成本太高，比MD5更安全。
-
-4、读写分离——https://segmentfault.com/a/1190000003716617
-
-5、axios——已有
-
-6、express——已有
-
-7、docker
-
-8、mq——消息总线（Message Queue），是一种跨进程的通信机制，用于上下游传递消息。
-
-9、loaderbalence
+本系统，在注册和登陆时对用户密码使用了Bcrypt加密，最后保存到数据库中的是加密后的密码，所以即使开发者进入数据库也无法泄露用户密码，保障了用户信息安全。
 
 
+###### 6、读写分离
 
-#### 步骤
+MySQL读写分离基本原理是让master数据库处理写操作，slave数据库处理读操作。master将写操作的变更同步到各个slave节点。
+
+MySQL读写分离能提高系统性能的原因在于：
+
+l物理服务器增加，机器处理能力提升。拿硬件换性能。
+
+
+l主从只负责各自的读和写，极大程度缓解X锁和S锁争用。
+
+lslave可以配置myiasm引擎，提升查询性能以及节约系统开销。
+
+lmaster直接写是并发的，slave通过主库发送来的binlog恢复数据是异步。
+
+lslave可以单独设置一些参数来提升其读的性能。
+
+l增加冗余，提高可用性。
+ 本系统，使用两个mysql数据库：
+
+lmaster： IP为127.0.0.1，端口为3306 
+
+
+lslave： IP为127.0.0.1，端口为3307 
+
+
+###### 7、mq——消息总线（Message Queue），是一种跨进程的通信机制，用于上下游传递消息。
+
+###### 8、docker
+
+###### 9、loaderbalence
+
+
+
+#### 项目启动步骤
 
 1、下载
 
