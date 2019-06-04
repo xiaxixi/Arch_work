@@ -69,7 +69,7 @@ module.exports = (sequelize, DataTypes) => {
     }, process.env.JWT_SECRET);
   }
 
-  // 验证密码
+  // 验证密码是否一致
   User.prototype.isValidPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
   }
