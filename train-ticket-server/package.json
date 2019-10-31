@@ -23,7 +23,7 @@
     "mysql": "^2.16.0",
     "mysql2": "^1.6.3",
     "nodemailer": "^6.2.1",
-    "sequelize": "^4.41.1"
+    "sequelize": "^5.15.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
